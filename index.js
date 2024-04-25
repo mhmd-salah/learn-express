@@ -14,23 +14,16 @@ mongoose.connect( "mongodb+srv://msmhmdsalah:yVxF0Rv452zJnQw6@cluster0.jvyaeyw.m
 })
 
 
-serv.get( "/findsum/:num1/:num2", ( req, res ) =>
+//--------ARTICLES_ENDPOINT---------
+serv.post( "/articles", async( req, res ) =>
 {
-  const sum = parseInt(req.params.num1) + parseInt(req.params.num2)
-  console.log(sum)
-  res.send("find sum")
-} );
-
-serv.get( "/sayhello", ( req, res ) =>
-{
-  // console.log( req.body )
-  // console.log(req.query.name)
-  // res.sendfile(__dirname+"/src/numbers.ejs")
-  res.render( "numbers.ejs", {
-    name: "salah",
-    
-  })
-} );
+  const newArticle = new Article()
+  newArticle.title = "my first article"
+  newArticle.body = "this is the body"
+  newArticle.numberOfLiks = 100;
+  await newArticle.save()
+  res.send("done add new article")
+})
 
 
 
