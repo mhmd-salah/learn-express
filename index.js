@@ -18,9 +18,14 @@ mongoose.connect( "mongodb+srv://msmhmdsalah:yVxF0Rv452zJnQw6@cluster0.jvyaeyw.m
 serv.post( "/articles", async( req, res ) =>
 {
   const newArticle = new Article()
-  newArticle.title = "my first article"
-  newArticle.body = "this is the body"
-  newArticle.numberOfLiks = 100;
+  const artTitle = req.body.title
+  const artBody = req.body.body
+  const artLiks = req.body.liks
+
+  //---------------------------
+  newArticle.title = artTitle
+  newArticle.body = artBody
+  newArticle.numberOfLiks = artLiks;
   await newArticle.save()
   res.send("done add new article")
 })
