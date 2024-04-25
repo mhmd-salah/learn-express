@@ -1,26 +1,26 @@
 const express = require( "express" );
-const app = express();
+const serv = express();
+serv.use( express.json() )
 
-app.get( "/hello", ( req, res ) =>
+serv.get( "/findsum/:num1/:num2", ( req, res ) =>
 {
-  res.send("hello")
+  const sum = parseInt(req.params.num1) + parseInt(req.params.num2)
+  console.log(sum)
+  res.send("find sum")
 } );
-app.get( "/welcome", (req,res) =>
-{
-  res.send( "welcome" )
-  console.log(req.headers)
-} )
-app.put( "/addcomment", ( req, res ) =>
-{
-  res.send("post request to add comment")
-})
-app.delete( "/delete", ( req, res ) =>
-{
-  res.send("delete function")
-  console.log(req.headers)
-})
 
-app.listen( 3000, () =>
+serv.get( "/sayhello", ( req, res ) =>
 {
-  console.log("listen on port : 3000")
+  // console.log( req.body )
+  // console.log(req.query.name)
+  // res.sendfile(__dirname+"/src/numbers.ejs")
+  res.render("numbers.ejs")
+} );
+
+
+
+
+serv.listen( 3000, () =>
+{
+  console.log("listent on port : 3000")
 })
